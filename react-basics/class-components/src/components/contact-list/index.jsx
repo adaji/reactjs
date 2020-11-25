@@ -48,21 +48,29 @@ class ContactList extends React.Component {
   }
   componentDidMount() {
     // TODO:  start api fetch here
-    this.setState({ contactsList: fetchFromMockApiEndPoint() });
+    fetchFromMockApiEndPoint().then((values) =>
+      this.setState({ contactsList: values })
+    );
   }
   render() {
     const { contactsList } = this.state;
+    const { filterStr } = this.props;
+
+    const regex = new RegExp(filterStr, "i");
+    const filteredContactsList = contactsList.filter(
+      (item) =>
+        regex.test(item.name) ||
+        regex.test(item.familyName) ||
+        regex.test(item.phoneNumber)
+    );
+
     return (
       <div className={styles.listWrapper}>
         {/* TODO:  edit here  and make it dynamic with API Call and mock data that provided in top of this file - use map for arrays in here and make it render at another function*/}
 
-        {contactsList.map((item, index) => (
+        {filteredContactsList.map((item, index) => (
           <ContactItem key={index} contactData={item} />
         ))}
-
-        {/* <ContactItem contactData={sampleContactData} />
-        <ContactItem contactData={sampleContactData} />
-        <ContactItem contactData={sampleContactData} /> */}
       </div>
     );
   }
