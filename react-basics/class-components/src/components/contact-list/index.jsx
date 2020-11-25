@@ -48,14 +48,21 @@ class ContactList extends React.Component {
   }
   componentDidMount() {
     // TODO:  start api fetch here
+    this.setState({ contactsList: fetchFromMockApiEndPoint() });
   }
   render() {
+    const { contactsList } = this.state;
     return (
       <div className={styles.listWrapper}>
         {/* TODO:  edit here  and make it dynamic with API Call and mock data that provided in top of this file - use map for arrays in here and make it render at another function*/}
+
+        {contactsList.map((item, index) => (
+          <ContactItem key={index} contactData={item} />
+        ))}
+
+        {/* <ContactItem contactData={sampleContactData} />
         <ContactItem contactData={sampleContactData} />
-        <ContactItem contactData={sampleContactData} />
-        <ContactItem contactData={sampleContactData} />
+        <ContactItem contactData={sampleContactData} /> */}
       </div>
     );
   }
