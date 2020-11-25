@@ -32,6 +32,15 @@ const fetchFromMockApiEndPoint = (shouldShowError = false) =>
     }, 1500)
   );
 
+const deleteFromMockApiEndPoint = (idToRemove, shouldShowError = false) =>
+  new Promise((resolvePromise, rejectPromise) =>
+    setTimeout(() => {
+      return !shouldShowError
+        ? resolvePromise(mockApiData.splice(idToRemove, 1))
+        : rejectPromise(new Error("Delete Mock API failed"));
+    }, 1500)
+  );
+
 const sampleContactData = {
   name: "Ali",
   familyName: "Malek",
@@ -67,7 +76,6 @@ class ContactList extends React.Component {
     return (
       <div className={styles.listWrapper}>
         {/* TODO:  edit here  and make it dynamic with API Call and mock data that provided in top of this file - use map for arrays in here and make it render at another function*/}
-
         {filteredContactsList.map((item, index) => (
           <ContactItem key={index} contactData={item} />
         ))}

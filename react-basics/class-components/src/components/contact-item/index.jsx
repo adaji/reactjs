@@ -1,6 +1,9 @@
 import React from "react";
 import Seperator from "../base-components/seperator";
 import styles from "./style.module.scss";
+//Icons
+import editIcon from "./edit.png";
+import removeIcon from "./remove.png";
 
 class ContactItem extends React.Component {
   render() {
@@ -9,6 +12,10 @@ class ContactItem extends React.Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.badge} />
+        <div className={styles.iconBox}>
+          <img src={editIcon} alt="Edit contact" className={styles.icon} />
+          <img src={removeIcon} alt="Remove contact" className={styles.icon} />
+        </div>
         <p className={styles.title}>Contact Item</p>
 
         <Seperator />

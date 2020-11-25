@@ -45,3 +45,17 @@
   font-weight: bold;
   color: #4caf50;
 }
+
+.iconBox {
+  display: inline;
+  float: right;
+}
+
+.icon {
+  width: 22px;
+  margin: 2px 2px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
