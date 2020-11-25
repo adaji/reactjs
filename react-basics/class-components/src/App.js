@@ -1,4 +1,7 @@
+//Files
 import logo from "./logo.svg";
+import addIcon from "./add.png";
+
 import "./App.css";
 import { useState } from "react";
 //Components
@@ -14,7 +17,10 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Contact List </h2>
         {/* import and show Contact List Component in here */}
-        <Filter setFilter={handleSetFilter} />
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <img className="icon" src={addIcon} alt="Add Contact" />
+          <Filter setFilter={handleSetFilter} />
+        </div>
         <ContactList filterStr={filterValue} />
       </header>
     </div>
