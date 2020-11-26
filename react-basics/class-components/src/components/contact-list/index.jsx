@@ -32,21 +32,12 @@ const fetchFromMockApiEndPoint = (shouldShowError = false) =>
     }, 1500)
   );
 
-const deleteFromMockApiEndPoint = (idToRemove, shouldShowError = false) =>
-  new Promise((resolvePromise, rejectPromise) =>
-    setTimeout(() => {
-      return !shouldShowError
-        ? resolvePromise(mockApiData.splice(idToRemove, 1))
-        : rejectPromise(new Error("Delete Mock API failed"));
-    }, 1500)
-  );
-
-const sampleContactData = {
-  name: "Ali",
-  familyName: "Malek",
-  phoneNumber: "+98912123456",
-  ID: 12,
-};
+// const sampleContactData = {
+//   name: "Ali",
+//   familyName: "Malek",
+//   phoneNumber: "+98912123456",
+//   ID: 12,
+// };
 
 class ContactList extends React.Component {
   constructor(props) {
@@ -61,10 +52,23 @@ class ContactList extends React.Component {
       this.setState({ contactsList: values })
     );
   }
+
   render() {
     const { contactsList } = this.state;
-    const { filterStr } = this.props;
+    const { filterStr, newContact } = this.props;
 
+    //Add Contact
+    //This condition is for preventing re-rendering in-finite loop
+    if (!contactsList.includes(newContact)) {
+      this.didUpdate = false;
+    }
+
+    if (newContact && !this.didUpdate) {
+      this.setState({ contactsList: [...contactsList, newContact] });
+      this.didUpdate = true;
+    }
+
+    //Filter contact
     const regex = new RegExp(filterStr, "i");
     const filteredContactsList = contactsList.filter(
       (item) =>
@@ -73,6 +77,7 @@ class ContactList extends React.Component {
         regex.test(item.phoneNumber)
     );
 
+    console.log(contactsList);
     return (
       <div className={styles.listWrapper}>
         {/* TODO:  edit here  and make it dynamic with API Call and mock data that provided in top of this file - use map for arrays in here and make it render at another function*/}
