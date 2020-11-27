@@ -14,7 +14,12 @@ class ContactItem extends React.Component {
         <div className={styles.badge} />
         <div className={styles.iconBox}>
           <img src={editIcon} alt="Edit contact" className={styles.icon} />
-          <img src={removeIcon} alt="Remove contact" className={styles.icon} />
+          <img
+            src={removeIcon}
+            alt="Remove contact"
+            className={styles.icon}
+            onClick={() => this.props.handleRemove(contactData)}
+          />
         </div>
         <p className={styles.title}>Contact Item</p>
 

@@ -45,12 +45,22 @@ class ContactList extends React.Component {
     this.state = {
       contactsList: [],
     };
+    this.handleRemove = this.handleRemove.bind(this);
   }
+
   componentDidMount() {
     // TODO:  start api fetch here
     fetchFromMockApiEndPoint().then((values) =>
       this.setState({ contactsList: values })
     );
+  }
+
+  handleRemove(remContact) {
+    this.setState({
+      contactsList: this.state.contactsList.filter(
+        (value) => value != remContact
+      ),
+    });
   }
 
   render() {
@@ -76,13 +86,15 @@ class ContactList extends React.Component {
         regex.test(item.familyName) ||
         regex.test(item.phoneNumber)
     );
-
-    console.log(contactsList);
     return (
       <div className={styles.listWrapper}>
         {/* TODO:  edit here  and make it dynamic with API Call and mock data that provided in top of this file - use map for arrays in here and make it render at another function*/}
         {filteredContactsList.map((item, index) => (
-          <ContactItem key={index} contactData={item} />
+          <ContactItem
+            key={index}
+            contactData={item}
+            handleRemove={this.handleRemove}
+          />
         ))}
       </div>
     );

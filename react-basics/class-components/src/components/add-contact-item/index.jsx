@@ -11,11 +11,14 @@ function AddContact(props) {
     let val = event.target.value;
 
     if (nam === "ID") {
+      if (val !== "" && !Number(val)) {
+        alert("ID must be a number");
+        event.target.value = "";
+      }
       newContact[nam] = Number(val);
     } else {
       newContact[nam] = val;
     }
-    console.log("New Contact updated: ", nam, val);
   };
 
   const submitHandler = () => {
