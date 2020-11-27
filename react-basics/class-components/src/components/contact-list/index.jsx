@@ -56,6 +56,7 @@ class ContactList extends React.Component {
   }
 
   handleRemove(remContact) {
+    console.log(this.state.contactsList.filter((value) => value != remContact));
     this.setState({
       contactsList: this.state.contactsList.filter(
         (value) => value != remContact

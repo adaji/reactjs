@@ -36,6 +36,7 @@ function AddContact(props) {
           className={styles.inputBox}
           name="name"
           onChange={changeHandler}
+          autoComplete="off"
         />
       </div>
       <div className={styles.itemRow}>
@@ -44,6 +45,7 @@ function AddContact(props) {
           className={styles.inputBox}
           name="familyName"
           onChange={changeHandler}
+          autoComplete="off"
         />
       </div>
       <div className={styles.itemRow}>
@@ -52,11 +54,17 @@ function AddContact(props) {
           className={styles.inputBox}
           name="phoneNumber"
           onChange={changeHandler}
+          autoComplete="off"
         />
       </div>
       <div className={styles.itemRow}>
         <p>ID:</p>
-        <input className={styles.inputBox} name="ID" onChange={changeHandler} />
+        <input
+          className={styles.inputBox}
+          name="ID"
+          onChange={changeHandler}
+          autoComplete="off"
+        />
       </div>
       <button onClick={submitHandler}>Add Contact</button>
     </div>

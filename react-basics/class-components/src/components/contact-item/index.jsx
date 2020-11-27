@@ -6,6 +6,16 @@ import editIcon from "./edit.png";
 import removeIcon from "./remove.png";
 
 class ContactItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.conRemHandler = this.conRemHandler.bind(this);
+  }
+
+  conRemHandler = () => {
+    this.props.handleRemove(this.props.contactData);
+  };
+
   render() {
     const { contactData } = this.props;
     const { name, familyName, phoneNumber, ID } = contactData;
@@ -18,7 +28,7 @@ class ContactItem extends React.Component {
             src={removeIcon}
             alt="Remove contact"
             className={styles.icon}
-            onClick={() => this.props.handleRemove(contactData)}
+            onClick={this.conRemHandler}
           />
         </div>
         <p className={styles.title}>Contact Item</p>
