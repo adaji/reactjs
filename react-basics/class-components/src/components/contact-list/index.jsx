@@ -46,6 +46,7 @@ class ContactList extends React.Component {
       contactsList: [],
     };
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   componentDidMount() {
@@ -56,12 +57,18 @@ class ContactList extends React.Component {
   }
 
   handleRemove(remContact) {
-    console.log(this.state.contactsList.filter((value) => value != remContact));
     this.setState({
       contactsList: this.state.contactsList.filter(
         (value) => value != remContact
       ),
     });
+  }
+
+  handleEdit(oldContact, editedContact) {
+    let listCopy = this.state.contactsList;
+    const index = listCopy.indexOf(oldContact);
+    listCopy[index] = editedContact;
+    this.setState({ contactsList: listCopy });
   }
 
   render() {
@@ -87,6 +94,7 @@ class ContactList extends React.Component {
         regex.test(item.familyName) ||
         regex.test(item.phoneNumber)
     );
+
     return (
       <div className={styles.listWrapper}>
         {/* TODO:  edit here  and make it dynamic with API Call and mock data that provided in top of this file - use map for arrays in here and make it render at another function*/}
@@ -95,6 +103,7 @@ class ContactList extends React.Component {
             key={index}
             contactData={item}
             handleRemove={this.handleRemove}
+            handleEdit={this.handleEdit}
           />
         ))}
       </div>
