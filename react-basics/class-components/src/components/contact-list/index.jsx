@@ -45,6 +45,9 @@ class ContactList extends React.Component {
     this.state = {
       contactsList: [],
     };
+
+    this.newAdded = null;
+
     this.handleRemove = this.handleRemove.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
@@ -59,7 +62,7 @@ class ContactList extends React.Component {
   handleRemove(remContact) {
     this.setState({
       contactsList: this.state.contactsList.filter(
-        (value) => value != remContact
+        (value) => value !== remContact
       ),
     });
   }
@@ -76,14 +79,13 @@ class ContactList extends React.Component {
     const { filterStr, newContact } = this.props;
 
     //Add Contact
-    //This condition is for preventing re-rendering in-finite loop
-    if (!contactsList.includes(newContact)) {
-      this.didUpdate = false;
-    }
-
-    if (newContact && !this.didUpdate) {
-      this.setState({ contactsList: [...contactsList, newContact] });
-      this.didUpdate = true;
+    //Using newAdd(NewContact) instead of didUpdate (Boolean) solved latest item remove/edit issue
+    if (newContact && this.newAdded !== newContact) {
+      console.log("Before", contactsList);
+      this.newAdded = newContact;
+      this.setState({ contactsList: [...contactsList, newContact] }, () =>
+        console.log("Added", this.state.contactsList)
+      );
     }
 
     //Filter contact

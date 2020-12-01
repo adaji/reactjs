@@ -21,6 +21,7 @@ class ContactItem extends React.Component {
       phoneNumber: "",
       ID: null,
     };
+
     this.changeHandler = this.changeHandler.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
   }
@@ -119,6 +120,7 @@ class ContactItem extends React.Component {
               name="familyName"
               defaultValue={familyName}
               onChange={this.changeHandler}
+              autoComplete="off"
             />
           </div>
           <div className={styles.itemRow}>

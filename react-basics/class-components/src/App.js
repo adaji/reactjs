@@ -15,7 +15,7 @@ function App() {
   const handleSetFilter = (value) => setFilterValue(value);
   //Add new contact states
   const [activeAdd, setActiveAdd] = useState(false);
-  const [newContact, setNewContact] = useState(null);
+  const [newContact, setNewContact] = useState();
 
   const addSubmitHandler = (newContact) => {
     setNewContact(newContact);

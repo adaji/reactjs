@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Seperator from "../base-components/seperator";
 import styles from "./style.module.scss";
 
@@ -14,6 +14,7 @@ function AddContact(props) {
       if (val !== "" && !Number(val)) {
         alert("ID must be a number");
         event.target.value = "";
+        val = null;
       }
       newContact[nam] = Number(val);
     } else {
